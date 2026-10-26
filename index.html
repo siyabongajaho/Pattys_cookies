@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Patty’s Cookies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf3e6;--card:#fffaf2;--ink:#3a1a10;--muted:#7b5b4b;--line:#e8d2b6;
+  --hero:#4a1f12;--onhero:#fff4e3;--chip:#f4dfc3;--head:#4a1f12;
+  --btn:#4a1f12;--onbtn:#fff4e3;--accent:#c98a4b;--wa:#1c9e55;--err:#b3261e;
+  color-scheme:light;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1a0f0a;--card:#2a1710;--ink:#f6e6d2;--muted:#c9a88c;--line:#4a2d20;
+    --hero:#2f1710;--onhero:#fff4e3;--chip:#3b2216;--head:#f0c48c;
+    --btn:#e8a860;--onbtn:#2a140c;--accent:#e8a860;--wa:#25c26a;--err:#ff9a90;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1a0f0a;--card:#2a1710;--ink:#f6e6d2;--muted:#c9a88c;--line:#4a2d20;
+  --hero:#2f1710;--onhero:#fff4e3;--chip:#3b2216;--head:#f0c48c;
+  --btn:#e8a860;--onbtn:#2a140c;--accent:#e8a860;--wa:#25c26a;--err:#ff9a90;color-scheme:dark;
+}
+html{scroll-padding-top:calc(76px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Nunito,system-ui,-apple-system,"Segoe UI",sans-serif;transition:background .25s,color .25s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font:400 24px Pacifico,cursive;color:var(--head);margin-right:auto}
+.logo svg{width:30px;height:30px}
+nav a{text-decoration:none;font-weight:600;padding:8px 10px;border-radius:999px}
+nav a:hover{background:var(--chip)}
+button,.btn{font:inherit;cursor:pointer}
+.theme{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--head);font-size:20px;line-height:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 24px;font-weight:800;text-decoration:none;background:var(--btn);color:var(--onbtn)}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.ghost{background:transparent;color:var(--onhero);border:2px solid var(--onhero)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hero{background:var(--hero);color:var(--onhero);position:relative;overflow:hidden;padding:56px 0 64px;border-radius:0 0 44px 44px}
+.hero .bigck{position:absolute;right:-60px;top:-30px;width:340px;height:340px;color:var(--onhero);opacity:.08}
+.hero h1{margin:0;font:400 clamp(54px,12vw,112px)/1 Pacifico,cursive}
+.hero h1 small{display:block;font-size:.5em;margin:6px 0 0 .6em;opacity:.9}
+.hero p{font-size:20px;margin:22px 0 28px;max-width:30ch}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.pill{display:inline-block;background:rgba(255,244,227,.14);border-radius:999px;padding:6px 14px;font-weight:600;font-size:15px;margin-top:26px;margin-right:8px}
+section{padding:56px 0 8px}
+h2{font:400 34px/1.2 Pacifico,cursive;color:var(--head);margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 26px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:28px;overflow:hidden}
+.card h3{margin:0;padding:16px 22px;background:var(--hero);color:var(--onhero);font:400 28px Pacifico,cursive}
+.card .desc{padding:14px 22px 4px;color:var(--muted);margin:0}
+.line{display:flex;align-items:center;gap:12px;padding:12px 22px}
+.line+.line{border-top:1px dashed var(--line)}
+.line .sz{font-weight:800;font-size:20px;width:48px}
+.line .pr{margin-right:auto;font-weight:800;font-size:20px;background:var(--chip);padding:4px 14px;border-radius:12px}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--head);font-size:22px;line-height:1;font-weight:800}
+.step button:hover{background:var(--chip)}
+.step output{min-width:26px;text-align:center;font-weight:800}
+.order{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;align-items:start;padding-bottom:56px}
+.panel{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:22px}
+.panel h3{margin:0 0 12px;font-size:20px;color:var(--head)}
+.sum{list-style:none;margin:0;padding:0}
+.sum li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.empty{color:var(--muted)}
+.tot{display:flex;justify-content:space-between;padding:6px 0}
+.tot.big{font-size:22px;font-weight:800;color:var(--head);border-top:2px solid var(--line);margin-top:6px;padding-top:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.seg label{border:2px solid var(--line);border-radius:16px;padding:10px 12px;font-weight:600;cursor:pointer;display:flex;gap:8px;align-items:center}
+.seg input{accent-color:var(--accent)}
+.seg label:has(input:checked){border-color:var(--accent);background:var(--chip)}
+.f{display:block;margin-bottom:12px;font-weight:600}
+.f input,.f textarea{display:block;width:100%;margin-top:4px;padding:11px 14px;border:2px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font:inherit}
+.f textarea{min-height:76px;resize:vertical}
+.err{color:var(--err);font-weight:600;min-height:1.5em;margin:4px 0}
+.note{font-size:14px;color:var(--muted);margin:10px 0 0}
+footer{background:var(--hero);color:var(--onhero);padding:34px 0;border-radius:44px 44px 0 0;text-align:center}
+footer .logo{justify-content:center;color:var(--onhero);margin:0 0 6px}
+footer p{margin:4px 0}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}body{transition:none}}
+@media (max-width:560px){nav{display:none}.hero{padding-top:40px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="ck" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="3.5"/><g fill="currentColor"><circle cx="22" cy="21" r="4"/><circle cx="41" cy="19" r="3.4"/><circle cx="46" cy="36" r="4"/><circle cx="27" cy="40" r="4.4"/><circle cx="36" cy="30" r="3"/><circle cx="19" cy="34" r="2.6"/><circle cx="38" cy="47" r="3"/></g></symbol></svg>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Patty’s Cookies home"><svg><use href="#ck"/></svg>Patty’s</a>
+    <nav><a href="#menu">Menu</a><a href="#order">Order</a></nav>
+    <button class="theme" id="theme" type="button" aria-label="Switch to dark mode">☾</button>
+    <a class="btn wa" id="waTop" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <svg class="bigck" aria-hidden="true"><use href="#ck"/></svg>
+  <div class="wrap">
+    <h1>Patty’s<small>Cookies</small></h1>
+    <p>Homemade goodness in every bite. Fresh biscuits and scones, baked by the litre.</p>
+    <div class="row">
+      <a class="btn" href="#menu" style="background:var(--onhero);color:var(--hero)">See the menu</a>
+      <a class="btn ghost" id="waHero" href="#" target="_blank" rel="noopener">Order on WhatsApp</a>
+    </div>
+    <span class="pill">Delivery R30</span><span class="pill">Orders via WhatsApp</span>
+  </div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <h2>Our menu</h2>
+    <p class="sub">Sold by the litre. Tap + to add to your order.</p>
+    <div class="cards" id="cards"></div>
+  </div>
+</section>
+
+<section id="order">
+  <div class="wrap">
+    <h2>Your order</h2>
+    <p class="sub">Check your basket, then send it to us on WhatsApp.</p>
+    <div class="order">
+      <div class="panel">
+        <h3>Basket</h3>
+        <ul class="sum" id="sum"></ul>
+        <div class="tot"><span>Items</span><span id="sub">R0</span></div>
+        <div class="tot"><span>Delivery</span><span id="del">R0</span></div>
+        <div class="tot big"><span>Total</span><span id="total">R0</span></div>
+      </div>
+      <div class="panel">
+        <h3>Delivery or collection</h3>
+        <div class="seg">
+          <label><input type="radio" name="m" value="delivery" checked>Deliver (R30)</label>
+          <label><input type="radio" name="m" value="collect">I’ll collect</label>
+        </div>
+        <label class="f">Your name<input id="name" autocomplete="name" placeholder="e.g. Thandi"></label>
+        <label class="f" id="addrWrap">Delivery address<textarea id="addr" autocomplete="street-address" placeholder="Street, suburb, landmarks"></textarea></label>
+        <label class="f">Notes (optional)<input id="notes" placeholder="Date or time you need it"></label>
+        <div class="err" id="err" role="alert"></div>
+        <a class="btn wa" id="send" href="#" target="_blank" rel="noopener" style="width:100%">Send order on WhatsApp</a>
+        <p class="note">This opens WhatsApp with your order ready to send. No payment is taken on this site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="logo"><svg><use href="#ck"/></svg>Patty’s Cookies</div>
+    <p>Homemade goodness in every bite</p>
+    <p>WhatsApp: <a href="tel:+27723459505">072 345 9505</a></p>
+  </div>
+</footer>
+
+<script>
+var NUM="27723459505",DELIVERY=30;
+var MENU=[
+ {name:"Biscuits",desc:"Golden, chunky biscuits studded with chocolate.",sizes:[["5L",250],["10L",500],["20L",950]]},
+ {name:"Scones",desc:"Soft, golden scones, baked fresh.",sizes:[["5L",200],["10L",400],["20L",800]]}
+];
+var qty={};
+var $=function(i){return document.getElementById(i)};
+var R=function(n){return "R"+n};
+var base="https://wa.me/"+NUM+"?text=";
+function hello(){return base+encodeURIComponent("Hi Patty’s Cookies! I’d like to place an order.")}
+["waTop","waHero"].forEach(function(id){$(id).href=hello()});
+
+// build menu
+var cards=$("cards");
+MENU.forEach(function(g,gi){
+  var c=document.createElement("div");c.className="card";
+  var h='<h3>'+g.name+'</h3><p class="desc">'+g.desc+'</p>';
+  g.sizes.forEach(function(s,si){
+    var k=gi+"-"+si;qty[k]=0;
+    h+='<div class="line"><span class="sz">'+s[0]+'</span><span class="pr">'+R(s[1])+'</span>'+
+    '<div class="step"><button type="button" data-k="'+k+'" data-d="-1" aria-label="Remove one '+g.name+' '+s[0]+'">−</button>'+
+    '<output id="q'+k+'">0</output>'+
+    '<button type="button" data-k="'+k+'" data-d="1" aria-label="Add one '+g.name+' '+s[0]+'">+</button></div></div>';
+  });
+  c.innerHTML=h;cards.appendChild(c);
+});
+cards.addEventListener("click",function(e){
+  var b=e.target.closest("button[data-k]");if(!b)return;
+  var k=b.dataset.k;qty[k]=Math.max(0,Math.min(20,qty[k]+Number(b.dataset.d)));
+  $("q"+k).textContent=qty[k];update();
+});
+
+function lines(){
+  var out=[];
+  MENU.forEach(function(g,gi){g.sizes.forEach(function(s,si){
+    var n=qty[gi+"-"+si];if(n)out.push({n:n,label:g.name+" "+s[0],price:s[1]});
+  })});
+  return out;
+}
+function mode(){return document.querySelector('input[name="m"]:checked').value}
+function message(L,sub,dl,total){
+  var m="Hi Patty’s Cookies! I’d like to order:\n";
+  L.forEach(function(l){m+="• "+l.n+" × "+l.label+" – "+R(l.n*l.price)+"\n"});
+  m+="\n"+(mode()==="delivery"?"Delivery (R"+DELIVERY+")":"Collection")+"\nTotal: "+R(total)+"\n";
+  if($("name").value.trim())m+="\nName: "+$("name").value.trim();
+  if(mode()==="delivery"&&$("addr").value.trim())m+="\nAddress: "+$("addr").value.trim();
+  if($("notes").value.trim())m+="\nNotes: "+$("notes").value.trim();
+  return m;
+}
+function update(){
+  var L=lines(),sub=0;
+  L.forEach(function(l){sub+=l.n*l.price});
+  var dl=(mode()==="delivery"&&L.length)?DELIVERY:0,total=sub+dl;
+  $("sum").innerHTML=L.length?L.map(function(l){return '<li><span>'+l.n+' × '+l.label+'</span><strong>'+R(l.n*l.price)+'</strong></li>'}).join(""):'<li class="empty">Nothing added yet. Use the + buttons in the menu.</li>';
+  $("sub").textContent=R(sub);$("del").textContent=dl?R(dl):(mode()==="collect"?"Free":R(0));$("total").textContent=R(total);
+  $("addrWrap").style.display=mode()==="delivery"?"block":"none";
+  $("send").href=L.length?base+encodeURIComponent(message(L,sub,dl,total)):"#";
+  return L.length;
+}
+$("send").addEventListener("click",function(e){
+  var err="";
+  if(!update())err="Add at least one item to your order.";
+  else if(!$("name").value.trim())err="Please enter your name.";
+  else if(mode()==="delivery"&&!$("addr").value.trim())err="Please enter your delivery address.";
+  $("err").textContent=err;
+  if(err)e.preventDefault();
+});
+document.querySelectorAll("#order input,#order textarea").forEach(function(el){el.addEventListener("input",function(){$("err").textContent="";update()})});
+
+// theme
+var root=document.documentElement,tb=$("theme");
+function isDark(){var t=root.getAttribute("data-theme");return t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches}
+function paint(){var d=isDark();tb.textContent=d?"☀":"☾";tb.setAttribute("aria-label",d?"Switch to light mode":"Switch to dark mode")}
+try{var s=localStorage.getItem("pc-theme");if(s)root.setAttribute("data-theme",s)}catch(e){}
+tb.addEventListener("click",function(){
+  var n=isDark()?"light":"dark";root.setAttribute("data-theme",n);
+  try{localStorage.setItem("pc-theme",n)}catch(e){}paint();
+});
+paint();update();
+</script>
+</body>
+</html>
